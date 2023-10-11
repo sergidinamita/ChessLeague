@@ -30,4 +30,4 @@ Podeu trobar el pla d'empresa a [Aquí](Documentaci%C3%B3/Plaempresa.pdf).
 
 ### Apk Joc
 
-Podeu trobar el apk del joc a [Aquí](https://drive.google.com/file/d/1b6qll89OierPf3bakCWhutkDOcdUHIdP/view?usp=sharing).
+Podeu trobar el apk del joc a [Aquí]([https://drive.google.com/file/d/1SfM0PNBjUMhWSZ8zzQI5HD_cHRhD4IhI/view?usp=sharing](https://drive.google.com/file/d/1SfM0PNBjUMhWSZ8zzQI5HD_cHRhD4IhI/view?usp=sharing)).
