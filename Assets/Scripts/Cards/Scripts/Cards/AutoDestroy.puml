@@ -1,0 +1,6 @@
+@startuml
+class AutoDestroy {
+    - Start() : void
+}
+MonoBehaviour <|-- AutoDestroy
+@enduml

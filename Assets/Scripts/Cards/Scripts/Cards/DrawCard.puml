@@ -1,0 +1,10 @@
+@startuml
+class DrawCard {
+    + deckSize : int = 5
+    - Start() : void
+    + OnClick() : void
+}
+MonoBehaviour <|-- DrawCard
+DrawCard --> "meArea" GameObject
+DrawCard --> "enemyArea" GameObject
+@enduml

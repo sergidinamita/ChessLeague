@@ -1,0 +1,68 @@
+@startuml
+class BoardDataDB <<partial>> {
+    + WhitePlayerId : string <<get>> <<set>>
+    + BlackPlayerId : string <<get>> <<set>>
+    + WhitheCards : string <<get>> <<set>>
+    + BlackCards : string <<get>> <<set>>
+    + StringBoard : string <<get>> <<set>>
+    + Turn : int <<get>> <<set>>
+    + Turns : int <<get>> <<set>>
+}
+IRealmObject <|-- BoardDataDB
+BoardDataDB --> "Id" ObjectId
+class Connection {
+    - Awake() : void
+    + Host : bool <<get>> <<set>>
+    + GameId : string <<get>> <<set>>
+}
+MonoBehaviour <|-- Connection
+Connection --> "Instance" Connection
+class GameDataDB <<partial>> {
+    + GameId : string <<get>> <<set>>
+    + Current : bool <<get>> <<set>>
+}
+IRealmObject <|-- GameDataDB
+GameDataDB --> "Id" ObjectId
+GameDataDB --> "Board" BoardDataDB
+class RealmController {
+    - started : bool = false
+    - partitionID : string
+    - _realmAppId : string = "parcagames-sttfq"
+    - localPlayer : ObjectId? = null
+    <<async>> - Awake() : void
+    - OnDisable() : void
+    + IsRealmReady() : bool
+    - GetOrCreateData() : GameDataDB
+    - CreateData() : GameDataDB
+    - GetData() : GameDataDB
+    - GenerateID() : string
+    + CreateBoard(idboard:ObjectId) : BoardDataDB
+    - ChooseRandomCards(size:int) : int[]
+    + GetBoardClass() : BoardDataDB
+    + GetBoard() : int[,]
+    + GetWhiteCards() : int[]
+    + GetBlackCards() : int[]
+    + GetTurn() : int
+    + GetTurns() : int
+    + GetGameID() : string
+    + GetWhitePlayerId() : string
+    + GetBlackPlayerId() : string
+    + {static} LlenarStringTablero(tablero:int[,]) : string
+    + UploadBoard(value:string) : void
+    + UploadBlackPlayerId(value:string) : void
+    + DeleteBlackCard(cardId:int) : void
+    + DeleteWhiteCard(cardId:int) : void
+    + UploadWhiteCards(value:string) : void
+    + UploadBlackCards(value:string) : void
+    + ResetearTabla() : void
+    + GetState() : bool
+    + ChangeTurn(turn:int) : void
+    + LoadedGame() : bool
+    + IsGameCreated(GameID:string) : bool
+}
+MonoBehaviour <|-- RealmController
+RealmController --> "Instance" RealmController
+RealmController --> "_realm" Realm
+RealmController --> "_realmApp" App
+RealmController --> "_realmUser" User
+@enduml

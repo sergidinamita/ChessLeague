@@ -1,0 +1,13 @@
+@startuml
+class BoardDataDB <<partial>> {
+    + Id : ObjectId <<get>> <<set>>
+    + WhitePlayerId : string <<get>> <<set>>
+    + BlackPlayerId : string <<get>> <<set>>
+    + WhitheCards : string <<get>> <<set>>
+    + BlackCards : string <<get>> <<set>>
+    + StringBoard : string <<get>> <<set>>
+    + Turn : int <<get>> <<set>>
+    + Turns : int <<get>> <<set>>
+}
+IRealmObject <|-- BoardDataDB
+@enduml

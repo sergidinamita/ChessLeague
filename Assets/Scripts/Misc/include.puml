@@ -1,0 +1,7 @@
+@startuml
+class Animations {
+    - velocidadRotacion : float = 50f
+    - Update() : void
+}
+MonoBehaviour <|-- Animations
+@enduml

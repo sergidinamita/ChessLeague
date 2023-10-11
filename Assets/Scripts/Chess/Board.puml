@@ -1,0 +1,45 @@
+@startuml
+class Board {
+    + board : int[,]
+    + turn : int = 0
+    + player : int = 0
+    + turns : int = 0
+    - started : bool
+    - whiteMaterial : Material
+    - blackMaterial : Material
+    - king : GameObject
+    - queen : GameObject
+    - bishop : GameObject
+    - knight : GameObject
+    - rook : GameObject
+    - pawn : GameObject
+    <<readonly>> - Pieces : GameObject[]
+    - wallObject : GameObject
+    + cardBeingPlayed : bool = false
+    - checkMateText : Canvas
+    + selectedPieceCache : GameObject
+    + whiteWin : bool = false
+    + blackWin : bool = false
+    + deck : GameObject[]
+    - whiteCardsId : int[]
+    - blackCardsId : int[]
+    + meArea : GameObject
+    + enemyArea : GameObject
+    + deckSize : int = 5
+    - soundManager : BaseSounds
+    - lastRefresh : float
+    - Awake() : void
+    - Start() : void
+    + RefreshTablero() : void
+    + RefreshCards() : void
+    + RevalidarCartas() : void
+    + InicializarPiezas() : void
+    + InicialitzarTablero() : void
+    + RevalidarPosiciones() : void
+    + RefreshTurn() : void
+    - Update() : void
+    - CheckIfGameIsCreated() : void
+    + LoadMainMenu() : void
+}
+MonoBehaviour <|-- Board
+@enduml

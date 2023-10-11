@@ -1,0 +1,9 @@
+@startuml
+class OutlineSelection {
+    - Update() : void
+}
+MonoBehaviour <|-- OutlineSelection
+OutlineSelection --> "highlight" Transform
+OutlineSelection --> "selection" Transform
+OutlineSelection --> "raycastHit" RaycastHit
+@enduml

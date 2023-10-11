@@ -1,0 +1,10 @@
+@startuml
+class CardZoom {
+    + canvas : GameObject
+    - zoomCard : GameObject
+    - Awake() : void
+    + OnMouseDown() : void
+    + OnMouseUp() : void
+}
+MonoBehaviour <|-- CardZoom
+@enduml

@@ -1,0 +1,297 @@
+@startuml
+class CameraController {
+    - mouseSensitivity : float = 3.0f
+    - cam : Camera
+    - MouseZoomSpeed : float = 15.0f
+    - TouchZoomSpeed : float = 0.1f
+    - ZoomMinBound : float = 0.1f
+    - ZoomMaxBound : float = 179.9f
+    - rotationY : float
+    - rotationX : float
+    - target : Transform
+    - distanceFromTarget : float = 3.0f
+    - currentRotation : Vector3
+    - smoothVelocity : Vector3
+    - smoothTime : float = 0.2f
+    - rotationXMinMax : Vector2
+    - sensivitySlider : Slider
+    - Start() : void
+    - Update() : void
+    - Zoom(deltaMagnitudeDiff:float, speed:float) : void
+    + SensivityChanged() : void
+}
+MonoBehaviour <|-- CameraController
+class OutlineSelection {
+    - highlight : Transform
+    - selection : Transform
+    - raycastHit : RaycastHit
+    - Update() : void
+}
+MonoBehaviour <|-- OutlineSelection
+class Pivot {
+    - pivotPoint : Transform
+    - Start() : void
+    - Update() : void
+}
+MonoBehaviour <|-- Pivot
+class AutoDestroy {
+    - Start() : void
+}
+MonoBehaviour <|-- AutoDestroy
+class Card {
+    + id : int
+    + cardName : string
+    + description : string
+    + player : int
+    - isPlayed : bool = false
+    - board : int[,]
+    - boardObject : GameObject
+    + effectPrefab : GameObject
+    - Start() : void
+    + ActivateEffect() : void
+    - Update() : void
+    - Reshuffle() : void
+    - MoveRight() : void
+    - MoveLeft() : void
+    - QueenMove() : void
+    - Upgrade() : void
+    - GreatWall() : void
+    - UpdateBoard() : void
+    - PlayEffect(x:int, y:int) : void
+}
+MonoBehaviour <|-- Card
+class DrawCard {
+    + deck : GameObject[]
+    + meArea : GameObject
+    + enemyArea : GameObject
+    + deckSize : int = 5
+    - Start() : void
+    + OnClick() : void
+}
+MonoBehaviour <|-- DrawCard
+class ZoomCard {
+    - originalPosition : Vector3
+    - isZoomed : bool = false
+    - Start() : void
+    + OnTap() : void
+    - MoveCardCenter() : IEnumerator
+    - MoveCardBack() : IEnumerator
+}
+MonoBehaviour <|-- ZoomCard
+class Board {
+    + board : int[,]
+    + turn : int = 0
+    + player : int = 0
+    + turns : int = 0
+    - started : bool
+    - whiteMaterial : Material
+    - blackMaterial : Material
+    - king : GameObject
+    - queen : GameObject
+    - bishop : GameObject
+    - knight : GameObject
+    - rook : GameObject
+    - pawn : GameObject
+    <<readonly>> - Pieces : GameObject[]
+    - wallObject : GameObject
+    + cardBeingPlayed : bool = false
+    - checkMateText : Canvas
+    + selectedPieceCache : GameObject
+    + whiteWin : bool = false
+    + blackWin : bool = false
+    + deck : GameObject[]
+    - whiteCardsId : int[]
+    - blackCardsId : int[]
+    + meArea : GameObject
+    + enemyArea : GameObject
+    + deckSize : int = 5
+    - soundManager : BaseSounds
+    - lastRefresh : float
+    - Awake() : void
+    - Start() : void
+    + RefreshTablero() : void
+    + RefreshCards() : void
+    + RevalidarCartas() : void
+    + InicializarPiezas() : void
+    + InicialitzarTablero() : void
+    + RevalidarPosiciones() : void
+    + RefreshTurn() : void
+    - Update() : void
+    - CheckIfGameIsCreated() : void
+    + LoadMainMenu() : void
+}
+MonoBehaviour <|-- Board
+class InputManager {
+    - rbX : int = 0
+    - rbY : int = 4
+    - rnX : int = 7
+    - rnY : int = 4
+    + selectedPiece : GameObject
+    - soundManager : BaseSounds
+    - turnText : TextMeshProUGUI
+    - boardObject : GameObject
+    - board : int[,]
+    <<readonly>> - enroqueRealizado : bool[,]
+    - turnPiece : GameObject
+    - whiteMaterial : Material
+    - blackMaterial : Material
+    - Start() : void
+    - Update() : void
+    - ClickTablero(hit:RaycastHit) : void
+    - ClickPieza(pieza:GameObject) : void
+    + Mover(x:int, y:int, x2:int, y2:int, newPosition:Vector3) : void
+    - CambiarTurno() : void
+    + CambiarTurnoVisual() : void
+    - Mover3D(x2:int, y2:int, newPosition:Vector3) : void
+    - RealizarEnroque(x:int, y:int, x2:int, y2:int) : void
+    - IsObjectHere(position:Vector3) : bool
+    - ObjectHere(position:Vector3) : GameObject
+    + MovimientoLegal(x:int, y:int, x2:int, y2:int) : bool
+    - NoJaquePreMovimiento(x:int, y:int, x2:int, y2:int) : bool
+    - EsJaquePostMovimiento(x:int, y:int, x2:int, y2:int) : bool
+    - EsEnroqueValido(x:int, y:int, x2:int, y2:int) : bool
+    + CapturaBlancaInvalida(x:int, y:int, x2:int, y2:int) : bool
+    + CapturaNegraInvalida(x:int, y:int, x2:int, y2:int) : bool
+    + EsMovimientoDiagonal(x:int, y:int, x2:int, y2:int) : bool
+    - MovimientoDiagonalValido(x:int, y:int, x2:int, y2:int) : bool
+    - MovimientoHorizontalValido(x:int, y:int, y2:int) : bool
+    - MovimientoVerticalValido(x:int, y:int, x2:int) : bool
+    + EsJaque(reyX:int, reyY:int, boardCopy:int[,]) : bool
+    - JaqueHorizontal(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueVertical(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueDiagonal(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueCaballo(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    + EsJaqueMate(reyX:int, reyY:int) : bool
+    - RecuperarTablero() : int[,]
+    - ActualizarTablero(tablero:string) : void
+}
+MonoBehaviour <|-- InputManager
+class Piece {
+    + x : int
+    + z : int
+    + type : int
+    + color : int
+}
+MonoBehaviour <|-- Piece
+class ButtonController {
+    - activeSettings : bool = false
+    - settings : GameObject
+    + ActivateSettings() : void
+}
+MonoBehaviour <|-- ButtonController
+class CardZoom {
+    + canvas : GameObject
+    - zoomCard : GameObject
+    - Awake() : void
+    + OnMouseDown() : void
+    + OnMouseUp() : void
+}
+MonoBehaviour <|-- CardZoom
+class DragDrop {
+    + isDragging : bool = false
+    - startPosition : Vector3
+    + isOverDropZone : bool = false
+    + dropZone : GameObject
+    - uiCamera : Camera
+    - mainCamera : Camera
+    - endPosition : Vector3
+    + CardBanner : GameObject
+    + effect : GameObject
+    - Start() : void
+    - Update() : void
+    - OnCollisionEnter2D(collision:Collision2D) : void
+    - OnCollisionExit2D(collision:Collision2D) : void
+    + StartDrag() : void
+    + EndDrag() : void
+    + UsedCardAnimation() : IEnumerator
+    - MoveCardBackToOrigin() : IEnumerator
+}
+MonoBehaviour <|-- DragDrop
+class MainMenu {
+    - mainMenu : GameObject
+    - joinMenu : GameObject
+    - inputField : TMP_InputField
+    - soundManager : GameObject
+    - soundOnIcon : Sprite
+    - soundOffIcon : Sprite
+    - muted : bool = false
+    + OnClickCreateGame() : void
+    + OnClickJoinGameMenu() : void
+    + OnClickJoinGameButton() : void
+    + OnClickMute() : void
+    + ReturnJoinGame() : void
+}
+MonoBehaviour <|-- MainMenu
+class Animations {
+    - velocidadRotacion : float = 50f
+    - Update() : void
+}
+MonoBehaviour <|-- Animations
+class BoardDataDB <<partial>> {
+    + Id : ObjectId <<get>> <<set>>
+    + WhitePlayerId : string <<get>> <<set>>
+    + BlackPlayerId : string <<get>> <<set>>
+    + WhitheCards : string <<get>> <<set>>
+    + BlackCards : string <<get>> <<set>>
+    + StringBoard : string <<get>> <<set>>
+    + Turn : int <<get>> <<set>>
+    + Turns : int <<get>> <<set>>
+}
+IRealmObject <|-- BoardDataDB
+class Connection {
+    + {static} Instance : Connection
+    - Awake() : void
+    + Host : bool <<get>> <<set>>
+    + GameId : string <<get>> <<set>>
+}
+MonoBehaviour <|-- Connection
+class GameDataDB <<partial>> {
+    + Id : ObjectId <<get>> <<set>>
+    + GameId : string <<get>> <<set>>
+    + Board : BoardDataDB <<get>> <<set>>
+    + Current : bool <<get>> <<set>>
+}
+IRealmObject <|-- GameDataDB
+class RealmController {
+    {static} + Instance : RealmController
+    - _realm : Realm
+    - _realmApp : App
+    - _realmUser : User
+    - started : bool = false
+    - partitionID : string
+    - _realmAppId : string = "parcagames-sttfq"
+    - localPlayer : ObjectId? = null
+    - availableCards : GameObject[]
+    <<async>> - Awake() : void
+    - OnDisable() : void
+    + IsRealmReady() : bool
+    - GetOrCreateData() : GameDataDB
+    - CreateData() : GameDataDB
+    - GetData() : GameDataDB
+    - GenerateID() : string
+    + CreateBoard(idboard:ObjectId) : BoardDataDB
+    - ChooseRandomCards(size:int) : int[]
+    + GetBoardClass() : BoardDataDB
+    + GetBoard() : int[,]
+    + GetWhiteCards() : int[]
+    + GetBlackCards() : int[]
+    + GetTurn() : int
+    + GetTurns() : int
+    + GetGameID() : string
+    + GetWhitePlayerId() : string
+    + GetBlackPlayerId() : string
+    + {static} LlenarStringTablero(tablero:int[,]) : string
+    + UploadBoard(value:string) : void
+    + UploadBlackPlayerId(value:string) : void
+    + DeleteBlackCard(cardId:int) : void
+    + DeleteWhiteCard(cardId:int) : void
+    + UploadWhiteCards(value:string) : void
+    + UploadBlackCards(value:string) : void
+    + ResetearTabla() : void
+    + GetState() : bool
+    + ChangeTurn(turn:int) : void
+    + LoadedGame() : bool
+    + IsGameCreated(GameID:string) : bool
+}
+MonoBehaviour <|-- RealmController
+@enduml

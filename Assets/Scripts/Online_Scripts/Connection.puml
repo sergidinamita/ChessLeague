@@ -1,0 +1,9 @@
+@startuml
+class Connection {
+    + {static} Instance : Connection
+    - Awake() : void
+    + Host : bool <<get>> <<set>>
+    + GameId : string <<get>> <<set>>
+}
+MonoBehaviour <|-- Connection
+@enduml

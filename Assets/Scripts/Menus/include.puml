@@ -1,0 +1,51 @@
+@startuml
+class ButtonController {
+    - activeSettings : bool = false
+    + ActivateSettings() : void
+}
+MonoBehaviour <|-- ButtonController
+ButtonController --> "settings" GameObject
+class CardZoom {
+    - Awake() : void
+    + OnMouseDown() : void
+    + OnMouseUp() : void
+}
+MonoBehaviour <|-- CardZoom
+CardZoom --> "canvas" GameObject
+CardZoom --> "zoomCard" GameObject
+class DragDrop {
+    + isDragging : bool = false
+    + isOverDropZone : bool = false
+    - Start() : void
+    - Update() : void
+    - OnCollisionEnter2D(collision:Collision2D) : void
+    - OnCollisionExit2D(collision:Collision2D) : void
+    + StartDrag() : void
+    + EndDrag() : void
+    + UsedCardAnimation() : IEnumerator
+    - MoveCardBackToOrigin() : IEnumerator
+}
+MonoBehaviour <|-- DragDrop
+DragDrop --> "startPosition" Vector3
+DragDrop --> "dropZone" GameObject
+DragDrop --> "uiCamera" Camera
+DragDrop --> "mainCamera" Camera
+DragDrop --> "endPosition" Vector3
+DragDrop --> "CardBanner" GameObject
+DragDrop --> "effect" GameObject
+class MainMenu {
+    - muted : bool = false
+    + OnClickCreateGame() : void
+    + OnClickJoinGameMenu() : void
+    + OnClickJoinGameButton() : void
+    + OnClickMute() : void
+    + ReturnJoinGame() : void
+}
+MonoBehaviour <|-- MainMenu
+MainMenu --> "mainMenu" GameObject
+MainMenu --> "joinMenu" GameObject
+MainMenu --> "inputField" TMP_InputField
+MainMenu --> "soundManager" GameObject
+MainMenu --> "soundOnIcon" Sprite
+MainMenu --> "soundOffIcon" Sprite
+@enduml

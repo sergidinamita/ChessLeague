@@ -1,0 +1,24 @@
+@startuml
+class Card {
+    + id : int
+    + cardName : string
+    + description : string
+    + player : int
+    - isPlayed : bool = false
+    - board : int[,]
+    - boardObject : GameObject
+    + effectPrefab : GameObject
+    - Start() : void
+    + ActivateEffect() : void
+    - Update() : void
+    - Reshuffle() : void
+    - MoveRight() : void
+    - MoveLeft() : void
+    - QueenMove() : void
+    - Upgrade() : void
+    - GreatWall() : void
+    - UpdateBoard() : void
+    - PlayEffect(x:int, y:int) : void
+}
+MonoBehaviour <|-- Card
+@enduml

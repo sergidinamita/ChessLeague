@@ -1,0 +1,9 @@
+@startuml
+class GameDataDB <<partial>> {
+    + Id : ObjectId <<get>> <<set>>
+    + GameId : string <<get>> <<set>>
+    + Board : BoardDataDB <<get>> <<set>>
+    + Current : bool <<get>> <<set>>
+}
+IRealmObject <|-- GameDataDB
+@enduml

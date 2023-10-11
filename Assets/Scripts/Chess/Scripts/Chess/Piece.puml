@@ -1,0 +1,9 @@
+@startuml
+class Piece {
+    + x : int
+    + z : int
+    + type : int
+    + color : int
+}
+MonoBehaviour <|-- Piece
+@enduml

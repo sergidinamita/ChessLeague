@@ -1,0 +1,45 @@
+@startuml
+class InputManager {
+    - rbX : int = 0
+    - rbY : int = 4
+    - rnX : int = 7
+    - rnY : int = 4
+    - Start() : void
+    - Update() : void
+    - ClickTablero(hit:RaycastHit) : void
+    - ClickPieza(pieza:GameObject) : void
+    + Mover(x:int, y:int, x2:int, y2:int, newPosition:Vector3) : void
+    - CambiarTurno() : void
+    + CambiarTurnoVisual() : void
+    - Mover3D(x2:int, y2:int, newPosition:Vector3) : void
+    - RealizarEnroque(x:int, y:int, x2:int, y2:int) : void
+    - IsObjectHere(position:Vector3) : bool
+    - ObjectHere(position:Vector3) : GameObject
+    + MovimientoLegal(x:int, y:int, x2:int, y2:int) : bool
+    - NoJaquePreMovimiento(x:int, y:int, x2:int, y2:int) : bool
+    - EsJaquePostMovimiento(x:int, y:int, x2:int, y2:int) : bool
+    - EsEnroqueValido(x:int, y:int, x2:int, y2:int) : bool
+    + CapturaBlancaInvalida(x:int, y:int, x2:int, y2:int) : bool
+    + CapturaNegraInvalida(x:int, y:int, x2:int, y2:int) : bool
+    + EsMovimientoDiagonal(x:int, y:int, x2:int, y2:int) : bool
+    - MovimientoDiagonalValido(x:int, y:int, x2:int, y2:int) : bool
+    - MovimientoHorizontalValido(x:int, y:int, y2:int) : bool
+    - MovimientoVerticalValido(x:int, y:int, x2:int) : bool
+    + EsJaque(reyX:int, reyY:int, boardCopy:int[,]) : bool
+    - JaqueHorizontal(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueVertical(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueDiagonal(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    - JaqueCaballo(reyX:int, reyY:int, colorRey:int, boardCopy:int[,]) : bool
+    + EsJaqueMate(reyX:int, reyY:int) : bool
+    - RecuperarTablero() : int[,]
+    - ActualizarTablero(tablero:string) : void
+}
+MonoBehaviour <|-- InputManager
+InputManager --> "selectedPiece" GameObject
+InputManager --> "soundManager" BaseSounds
+InputManager --> "turnText" TextMeshProUGUI
+InputManager --> "boardObject" GameObject
+InputManager --> "turnPiece" GameObject
+InputManager --> "whiteMaterial" Material
+InputManager --> "blackMaterial" Material
+@enduml

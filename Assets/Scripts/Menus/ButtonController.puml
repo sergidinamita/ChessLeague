@@ -1,0 +1,8 @@
+@startuml
+class ButtonController {
+    - activeSettings : bool = false
+    - settings : GameObject
+    + ActivateSettings() : void
+}
+MonoBehaviour <|-- ButtonController
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+class DragDrop {
+    + isDragging : bool = false
+    - startPosition : Vector3
+    + isOverDropZone : bool = false
+    + dropZone : GameObject
+    - uiCamera : Camera
+    - mainCamera : Camera
+    - endPosition : Vector3
+    + CardBanner : GameObject
+    + effect : GameObject
+    - Start() : void
+    - Update() : void
+    - OnCollisionEnter2D(collision:Collision2D) : void
+    - OnCollisionExit2D(collision:Collision2D) : void
+    + StartDrag() : void
+    + EndDrag() : void
+    + UsedCardAnimation() : IEnumerator
+    - MoveCardBackToOrigin() : IEnumerator
+}
+MonoBehaviour <|-- DragDrop
+@enduml

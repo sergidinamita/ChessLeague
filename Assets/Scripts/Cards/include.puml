@@ -1,0 +1,44 @@
+@startuml
+class AutoDestroy {
+    - Start() : void
+}
+MonoBehaviour <|-- AutoDestroy
+class Card {
+    + id : int
+    + cardName : string
+    + description : string
+    + player : int
+    - isPlayed : bool = false
+    - Start() : void
+    + ActivateEffect() : void
+    - Update() : void
+    - Reshuffle() : void
+    - MoveRight() : void
+    - MoveLeft() : void
+    - QueenMove() : void
+    - Upgrade() : void
+    - GreatWall() : void
+    - UpdateBoard() : void
+    - PlayEffect(x:int, y:int) : void
+}
+MonoBehaviour <|-- Card
+Card --> "boardObject" GameObject
+Card --> "effectPrefab" GameObject
+class DrawCard {
+    + deckSize : int = 5
+    - Start() : void
+    + OnClick() : void
+}
+MonoBehaviour <|-- DrawCard
+DrawCard --> "meArea" GameObject
+DrawCard --> "enemyArea" GameObject
+class ZoomCard {
+    - isZoomed : bool = false
+    - Start() : void
+    + OnTap() : void
+    - MoveCardCenter() : IEnumerator
+    - MoveCardBack() : IEnumerator
+}
+MonoBehaviour <|-- ZoomCard
+ZoomCard --> "originalPosition" Vector3
+@enduml

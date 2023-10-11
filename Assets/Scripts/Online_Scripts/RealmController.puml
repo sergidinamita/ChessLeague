@@ -1,0 +1,44 @@
+@startuml
+class RealmController {
+    {static} + Instance : RealmController
+    - _realm : Realm
+    - _realmApp : App
+    - _realmUser : User
+    - started : bool = false
+    - partitionID : string
+    - _realmAppId : string = "parcagames-sttfq"
+    - localPlayer : ObjectId? = null
+    - availableCards : GameObject[]
+    <<async>> - Awake() : void
+    - OnDisable() : void
+    + IsRealmReady() : bool
+    - GetOrCreateData() : GameDataDB
+    - CreateData() : GameDataDB
+    - GetData() : GameDataDB
+    - GenerateID() : string
+    + CreateBoard(idboard:ObjectId) : BoardDataDB
+    - ChooseRandomCards(size:int) : int[]
+    + GetBoardClass() : BoardDataDB
+    + GetBoard() : int[,]
+    + GetWhiteCards() : int[]
+    + GetBlackCards() : int[]
+    + GetTurn() : int
+    + GetTurns() : int
+    + GetGameID() : string
+    + GetWhitePlayerId() : string
+    + GetBlackPlayerId() : string
+    + {static} LlenarStringTablero(tablero:int[,]) : string
+    + UploadBoard(value:string) : void
+    + UploadBlackPlayerId(value:string) : void
+    + DeleteBlackCard(cardId:int) : void
+    + DeleteWhiteCard(cardId:int) : void
+    + UploadWhiteCards(value:string) : void
+    + UploadBlackCards(value:string) : void
+    + ResetearTabla() : void
+    + GetState() : bool
+    + ChangeTurn(turn:int) : void
+    + LoadedGame() : bool
+    + IsGameCreated(GameID:string) : bool
+}
+MonoBehaviour <|-- RealmController
+@enduml

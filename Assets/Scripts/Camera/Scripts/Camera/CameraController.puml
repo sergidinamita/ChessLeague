@@ -1,0 +1,24 @@
+@startuml
+class CameraController {
+    - mouseSensitivity : float = 3.0f
+    - MouseZoomSpeed : float = 15.0f
+    - TouchZoomSpeed : float = 0.1f
+    - ZoomMinBound : float = 0.1f
+    - ZoomMaxBound : float = 179.9f
+    - rotationY : float
+    - rotationX : float
+    - distanceFromTarget : float = 3.0f
+    - smoothTime : float = 0.2f
+    - Start() : void
+    - Update() : void
+    - Zoom(deltaMagnitudeDiff:float, speed:float) : void
+    + SensivityChanged() : void
+}
+MonoBehaviour <|-- CameraController
+CameraController --> "cam" Camera
+CameraController --> "target" Transform
+CameraController --> "currentRotation" Vector3
+CameraController o-> "smoothVelocity" Vector3
+CameraController o-> "rotationXMinMax" Vector2
+CameraController --> "sensivitySlider" Slider
+@enduml

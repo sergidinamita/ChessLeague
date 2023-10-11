@@ -1,0 +1,11 @@
+@startuml
+class ZoomCard {
+    - originalPosition : Vector3
+    - isZoomed : bool = false
+    - Start() : void
+    + OnTap() : void
+    - MoveCardCenter() : IEnumerator
+    - MoveCardBack() : IEnumerator
+}
+MonoBehaviour <|-- ZoomCard
+@enduml

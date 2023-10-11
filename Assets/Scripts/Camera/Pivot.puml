@@ -1,0 +1,8 @@
+@startuml
+class Pivot {
+    - pivotPoint : Transform
+    - Start() : void
+    - Update() : void
+}
+MonoBehaviour <|-- Pivot
+@enduml

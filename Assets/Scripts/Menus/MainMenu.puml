@@ -1,0 +1,17 @@
+@startuml
+class MainMenu {
+    - mainMenu : GameObject
+    - joinMenu : GameObject
+    - inputField : TMP_InputField
+    - soundManager : GameObject
+    - soundOnIcon : Sprite
+    - soundOffIcon : Sprite
+    - muted : bool = false
+    + OnClickCreateGame() : void
+    + OnClickJoinGameMenu() : void
+    + OnClickJoinGameButton() : void
+    + OnClickMute() : void
+    + ReturnJoinGame() : void
+}
+MonoBehaviour <|-- MainMenu
+@enduml
